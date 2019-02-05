@@ -1,0 +1,19 @@
+﻿@using Restaurant.Views.Manage
+@inject SignInManager<ApplicationUser> SignInManager
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+}
+
+
+<a asp-action="Index" class="form-control btn btn-primary">Profile</a>
+<br /><br />
+<a asp-action="ChangePassword" class="form-control btn btn-primary">Password</a>
+<br /><br />
+@if (hasExternalLogins)
+{
+    <br /><br />
+    <a asp-action="ExternalLogins" class="form-control btn btn-primary">External logins</a>
+}
+<a asp-action="TwoFactorAuthentication" class="form-control btn btn-primary">Two-factor authentication</a>
+
+

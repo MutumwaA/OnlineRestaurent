@@ -1,0 +1,12 @@
+C:\Users\anesu.mutumwa\Documents\Visual Studio 2017\projects\Restaurant\Restaurant\bin\Debug\netcoreapp2.0\Restaurant.deps.json
+C:\Users\anesu.mutumwa\Documents\Visual Studio 2017\projects\Restaurant\Restaurant\bin\Debug\netcoreapp2.0\Restaurant.runtimeconfig.json
+C:\Users\anesu.mutumwa\Documents\Visual Studio 2017\projects\Restaurant\Restaurant\bin\Debug\netcoreapp2.0\Restaurant.runtimeconfig.dev.json
+C:\Users\anesu.mutumwa\Documents\Visual Studio 2017\projects\Restaurant\Restaurant\bin\Debug\netcoreapp2.0\Restaurant.dll
+C:\Users\anesu.mutumwa\Documents\Visual Studio 2017\projects\Restaurant\Restaurant\bin\Debug\netcoreapp2.0\Restaurant.pdb
+C:\Users\anesu.mutumwa\Documents\Visual Studio 2017\projects\Restaurant\Restaurant\obj\Debug\netcoreapp2.0\Restaurant.csprojAssemblyReference.cache
+C:\Users\anesu.mutumwa\Documents\Visual Studio 2017\projects\Restaurant\Restaurant\obj\Debug\netcoreapp2.0\Restaurant.csproj.CoreCompileInputs.cache
+C:\Users\anesu.mutumwa\Documents\Visual Studio 2017\projects\Restaurant\Restaurant\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+C:\Users\anesu.mutumwa\Documents\Visual Studio 2017\projects\Restaurant\Restaurant\obj\Debug\netcoreapp2.0\Restaurant.AssemblyInfoInputs.cache
+C:\Users\anesu.mutumwa\Documents\Visual Studio 2017\projects\Restaurant\Restaurant\obj\Debug\netcoreapp2.0\Restaurant.AssemblyInfo.cs
+C:\Users\anesu.mutumwa\Documents\Visual Studio 2017\projects\Restaurant\Restaurant\obj\Debug\netcoreapp2.0\Restaurant.dll
+C:\Users\anesu.mutumwa\Documents\Visual Studio 2017\projects\Restaurant\Restaurant\obj\Debug\netcoreapp2.0\Restaurant.pdb

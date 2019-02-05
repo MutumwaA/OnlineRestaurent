@@ -1,0 +1,252 @@
+﻿@using Restaurant.Utility
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Restaurant</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/Typehead.css" />
+        <link rel="stylesheet" href="~/css/bootstrap-datepicker.css" />
+        <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/Typehead.css" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.css" asp-append-version="true" />
+
+    </environment>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" asp-action="Index" asp-controller="Home">Restaurant</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+
+                @if (User.IsInRole(SD.AdminUser) || User.IsInRole(SD.CustomerEndUser))
+                {
+                    <li class="nav-item"><a class="nav-link" asp-action="OrderHistory" asp-controller="Order" >Order History</a></li>
+                }
+
+                @if (User.IsInRole(SD.AdminUser))
+                {
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Admin
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" asp-controller="Categories" asp-action="Index">Category</a>
+                            <a class="dropdown-item" asp-controller="SubCategories" asp-action="Index">Sub Category</a>
+                            <a class="dropdown-item" asp-controller="MenuItems" asp-action="Index">Menu Items</a>
+                            <a class="dropdown-item" asp-controller="Coupons" asp-action="Index">Coupons</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Order
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" asp-action="ManageOrder" asp-controller="Order" >Manage Order</a>
+                            <a class="dropdown-item"  asp-action="OrderPickup" asp-controller="Order" >Order Pickup</a>
+                            <a class="dropdown-item" href="#">Download Order Details</a>
+                        </div>
+                    </li>
+                }
+                @if (User.IsInRole(SD.AdminUser) || User.IsInRole(SD.CustomerEndUser))
+                {
+                    if (HttpContextAccessor.HttpContext.Session.GetInt32("CartCout") != null)
+                    {
+                        <li style="color:white">
+                            <a asp-controller="Cart" asp-action="Index" class="nav-link">
+                               (@HttpContextAccessor.HttpContext.Session.GetInt32("CartCout"))&nbsp;Items In Your Cart
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li style="color:white">
+                            <a asp-controller="Cart" asp-action="Index" class="nav-link">
+                                (0) &nbsp;Items In Your Cart
+                            </a>
+                        </li>
+
+                    }
+
+
+
+
+                }
+            </ul>
+        </div>
+
+
+
+        <div>
+            @await Html.PartialAsync("_LoginPartial")
+        </div>
+
+
+
+    </nav>
+    <div class="container body-content">
+        <br />
+        @RenderBody()
+        <br />
+        <hr />
+
+    </div>
+
+    <footer class="footer">
+        <div class="cont">
+            <p class="text-muted">&copy; 2019 - Restaurant</p>
+        </div>
+    </footer>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/js/bootstrap-datepicker.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+        <script src="~/js/bootstrap-datepicker.js"></script>
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
+@*@using Restaurant.Utility*@
+@*<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Restaurant</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" asp-action="Index" asp-controller="Home">Restaurant</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+
+                @if (User.IsInRole(SD.AdminUser) || User.IsInRole(SD.CustomerEndUser))
+                {
+                    <li class="nav-item"><a class="nav-link" href="a">Order History</a></li>
+                }
+
+                @if (User.IsInRole(SD.AdminUser))
+                {
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Admin
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" asp-controller="Categories" asp-action="Index">Category</a>
+                            <a class="dropdown-item" asp-controller="SubCategories" asp-action="Index">Sub Category</a>
+                            <a class="dropdown-item" asp-controller="MenuItems" asp-action="Index">Menu Items</a>
+                            <a class="dropdown-item" asp-controller="Coupons" asp-action="Index">Coupons</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Order
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Manage Order</a>
+                            <a class="dropdown-item" href="#">Order Pickup</a>
+                            <a class="dropdown-item" href="#">Download Order Details</a>
+                        </div>
+                    </li>
+                }
+                @if (User.IsInRole(SD.AdminUser) || User.IsInRole(SD.CustomerEndUser))
+                {
+                    <li style="color:white">
+                        <a href="a" class="nav-link">
+                            (0) &nbsp;Items In Your Cart
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+
+
+
+        <div>
+            @await Html.PartialAsync("_LoginPartial")
+        </div>
+
+
+
+    </nav>
+    <div class="container body-content">
+        <br />
+        @RenderBody()
+        <br />
+        <hr />
+
+    </div>
+
+    <footer class="footer">
+        <div class="cont">
+            <p class="text-muted">&copy; 2019 - Restaurant</p>
+        </div>
+    </footer>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>*@
